@@ -1,0 +1,163 @@
+/* Meta Ray-Ban Display is an additive display: unlit black adds no light,
+   so the page is black and only bounded surfaces carry light. */
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: clamp(15px, 3.4vmin, 22px);
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+body {
+  margin: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.25;
+}
+
+[hidden] { display: none !important; }
+
+.app-shell {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: 0;
+  padding: max(1rem, 4.5vmin);
+}
+
+/* Home */
+
+.home-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.home-head h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #cfcfcf;
+}
+
+.home-head p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #cfcfcf;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1 1 auto;
+  min-block-size: 0;
+}
+
+.card {
+  flex: 1 1 0;
+  min-block-size: 0;
+  max-block-size: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.9rem 1.2rem;
+  text-align: start;
+  font: inherit;
+  color: #fff;
+  background: #181818;
+  border: 3px solid #6b6b6b;
+  border-radius: 1.1rem;
+  cursor: pointer;
+}
+
+.card-name { font-size: 1.7rem; font-weight: 700; }
+.card-sub  { font-size: 1.15rem; color: #d6d6d6; }
+.card-resume { font-size: 1.05rem; color: #fff; font-weight: 600; }
+
+/* Player */
+
+.player-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #d6d6d6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.video {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  max-block-size: 52%;
+  margin-inline: auto;
+  background: #000;
+  border: 2px solid #3a3a3a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.video iframe { inline-size: 100%; block-size: 100%; border: 0; display: block; }
+/* Our buttons drive the API player; keep the iframe out of focus and pointer paths. */
+.video.api iframe { pointer-events: none; }
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+/* Shared button look */
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 3.4rem;
+  padding: 0.5rem 0.8rem;
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  background: #181818;
+  border: 3px solid #6b6b6b;
+  border-radius: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button.link { min-block-size: 2.8rem; font-size: 1.05rem; }
+
+/* Focus: thick white outline, lighter fill, and white border, so selection
+   shows through shape and brightness and not through color alone. */
+.card:focus-visible,
+.button:focus-visible,
+.card:focus,
+.button:focus {
+  outline: 4px solid #fff;
+  outline-offset: 3px;
+  background: #3a3a3a;
+  border-color: #fff;
+}
+
+.status {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #fff;
+}

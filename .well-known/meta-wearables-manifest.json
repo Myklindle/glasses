@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "name": "Mike's News",
+  "description": "Plays the latest PBS News Hour and Washington Week full episodes.",
+  "appearance": {
+    "theme_color": "#2F6FED",
+    "icon": {
+      "src": "../icons/news.svg",
+      "type": "monochrome"
+    }
+  }
+}

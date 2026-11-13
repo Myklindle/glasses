@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plays the latest PBS News Hour and Washington Week full episodes.">
+  <meta name="application-name" content="Mike's News">
+  <meta name="mrbd-web-app-capable" content="yes">
+  <title>Mike's News</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+
+    <section id="home" class="screen">
+      <header class="home-head">
+        <h1>News</h1>
+        <p id="today"></p>
+      </header>
+      <div id="cards" class="cards"></div>
+      <p id="home-status" class="status" role="status"></p>
+      <button id="retry" type="button" class="button" hidden>Try again</button>
+    </section>
+
+    <section id="player" class="screen" hidden>
+      <h1 id="now-playing" class="player-title"></h1>
+      <div id="player-mount" class="video"></div>
+      <p id="player-status" class="status" role="status" hidden></p>
+      <div id="controls" class="controls">
+        <button id="btn-back" type="button" class="button">&minus;15s</button>
+        <button id="btn-toggle" type="button" class="button">Pause</button>
+        <button id="btn-fwd" type="button" class="button">+30s</button>
+      </div>
+      <a id="link-yt" class="button link" href="https://www.youtube.com/" rel="noopener">Open in YouTube</a>
+    </section>
+
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>

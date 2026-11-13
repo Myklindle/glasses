@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+"""Find the newest full-episode upload for each show and write latest.json.
+
+Reads each channel's public Videos tab (no API key needed), picks the newest
+video whose title looks like a full episode, and records its video ID.
+
+Behavior worth knowing:
+- If a lookup fails, the previous value in latest.json is kept.
+- latest.json is rewritten only when an episode actually changes, so the
+  workflow only commits when there is something new.
+- Standard library only, so it runs on a stock GitHub runner.
+
+Usage:
+    python3 scripts/update_latest.py            # update latest.json
+    python3 scripts/update_latest.py --debug    # also print what was matched
+"""
+import datetime
+import json
+import os
+import re
+import sys
+import urllib.request
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT = os.path.join(ROOT, "latest.json")
+
+SHOWS = {
+    "newshour": {
+        "channel": "UC6ZFN9Tx6xh-skXCuRHCDpQ",
+        "title": re.compile(r"news ?hour.*full episode", re.I),
+    },
+    "washingtonweek": {
+        "channel": "UC2s0uKOc2WgB9eGta7cUUEA",
+        "title": re.compile(r"washington week.*full episode", re.I),
+    },
+}
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9",
+    # Skips the cookie-consent interstitial some regions get.
+    "Cookie": "CONSENT=YES+cb; SOCS=CAI",
+}
+
+DEBUG = "--debug" in sys.argv
+
+
+def fetch(url):
+    req = urllib.request.Request(url, headers=HEADERS)
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+def initial_data(html):
+    marker = "var ytInitialData = "
+    start = html.find(marker)
+    if start < 0:
+        raise RuntimeError("ytInitialData not found (page layout changed or blocked)")
+    data, _ = json.JSONDecoder().raw_decode(html[start + len(marker):])
+    return data
+
+
+def videos(node):
+    """Yield (video_id, title) in page order from both old and new layouts."""
+    stack = [node]
+    while stack:
+        cur = stack.pop()
+        if isinstance(cur, dict):
+            # New layout: lockupViewModel
+            if cur.get("contentType") == "LOCKUP_CONTENT_TYPE_VIDEO" and "contentId" in cur:
+                meta = cur.get("metadata", {}).get("lockupMetadataViewModel", {})
+                title = meta.get("title", {}).get("content")
+                if title:
+                    yield cur["contentId"], title
+                continue
+            # Old layout: videoRenderer
+            if "videoId" in cur and isinstance(cur.get("title"), dict):
+                runs = cur["title"].get("runs") or []
+                title = runs[0].get("text") if runs else cur["title"].get("simpleText")
+                if title:
+                    yield cur["videoId"], title
+                continue
+            stack.extend(reversed(list(cur.values())))
+        elif isinstance(cur, list):
+            stack.extend(reversed(cur))
+
+
+def newest_full_episode(show):
+    html = fetch("https://www.youtube.com/channel/%s/videos" % show["channel"])
+    seen = set()
+    for index, (vid, title) in enumerate(videos(initial_data(html))):
+        if vid in seen:
+            continue
+        seen.add(vid)
+        if show["title"].search(title):
+            if DEBUG:
+                print("  matched at position %d: %s %s" % (index, vid, title))
+            return {"videoId": vid, "title": title}
+    raise RuntimeError("no full episode in the %d most recent uploads" % len(seen))
+
+
+def main():
+    try:
+        with open(OUT, encoding="utf-8") as fh:
+            current = json.load(fh)
+    except (OSError, ValueError):
+        current = {}
+    shows_now = dict(current.get("shows", {}))
+
+    changed = False
+    missing = False
+    for key, show in SHOWS.items():
+        try:
+            found = newest_full_episode(show)
+        except Exception as exc:  # keep going; keep the old value
+            print("::warning::%s lookup failed: %s" % (key, exc))
+            if key not in shows_now:
+                missing = True
+            continue
+        if shows_now.get(key) != found:
+            print("%s: %s" % (key, found["title"]))
+            shows_now[key] = found
+            changed = True
+        elif DEBUG:
+            print("%s: unchanged (%s)" % (key, found["title"]))
+
+    if changed:
+        payload = {
+            "updated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "shows": shows_now,
+        }
+        with open(OUT, "w", encoding="utf-8") as fh:
+            json.dump(payload, fh, indent=2, ensure_ascii=False)
+            fh.write("\n")
+
+    gh_out = os.environ.get("GITHUB_OUTPUT")
+    if gh_out:
+        with open(gh_out, "a", encoding="utf-8") as fh:
+            fh.write("changed=%s\n" % ("true" if changed else "false"))
+
+    # Fail only when a show has no episode at all to fall back on.
+    return 1 if missing else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
