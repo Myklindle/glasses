@@ -1,14 +1,14 @@
 # Mike's News (Meta Ray-Ban Display web app)
 
-Two buttons: the latest **PBS News Hour** full episode and the latest **Washington Week** full episode, played through the YouTube embedded player. On Fridays Washington Week is listed first. Playback position is remembered per episode.
+Four buttons: the latest full episode of **PBS News Hour**, **Washington Week**, **Compass Points** and **Horizons**, played through the YouTube embedded player. On Fridays Washington Week is listed first. Playback position is remembered per episode.
 
 ## How it works
 
 - `index.html`, `styles.css`, `app.js`: the app. Built for the 600 x 600 additive display, navigated with the Neural Band or touchpad. No custom focus code; the browser handles directional navigation.
-- `latest.json`: the current episode IDs. Refreshed by `scripts/update_latest.py`, which reads each channel's public Videos tab and picks the newest upload titled "... full episode". No API key.
+- `latest.json`: the current episode IDs. Refreshed by `scripts/update_latest.py`, which reads each channel's public Videos tab and picks the newest upload titled "... full episode" (News Hour, Washington Week), or the top entry of the show's full-episode playlist (Compass Points, Horizons, whose upload titles are topics). The playlist IDs are in the script and in `app.js`. No API key.
 - `.github/workflows/pages.yml`: every 20 minutes (and on every push) it refreshes `latest.json`, commits it if changed, and deploys to GitHub Pages. Scheduled runs with nothing new skip the deploy.
 - `.well-known/meta-wearables-manifest.json` and `icons/news.svg`: the app name and icon the glasses read.
-- Story skipping: the lookup script also reads each episode's chapters (News Hour has one per story) into `latest.json`. **Prev story** and **Next story** jump between them, and a line under the video shows which story you're in. Episodes without chapters (Washington Week) get **-5 min** and **+5 min** instead. The chapter math lives in `chapters.js`.
+- Story skipping: the lookup script also reads each episode's chapters (News Hour has one per story) into `latest.json`. **Prev story** and **Next story** jump between them, and a line under the video shows which story you're in. Episodes without chapters (everything but News Hour) get **-5 min** and **+5 min** instead. The chapter math lives in `chapters.js`.
 - If `latest.json` can't be loaded, each card opens that channel's latest uploads instead. If the YouTube API script can't load, the app falls back to a plain embed with YouTube's own controls.
 
 ## Publish (one time)

@@ -4,6 +4,8 @@
   const SHOWS = [
     { key: 'newshour', name: 'PBS News Hour', channelId: 'UC6ZFN9Tx6xh-skXCuRHCDpQ' },
     { key: 'washingtonweek', name: 'Washington Week', channelId: 'UC2s0uKOc2WgB9eGta7cUUEA' },
+    { key: 'compasspoints', name: 'Compass Points', channelId: 'UC6ZFN9Tx6xh-skXCuRHCDpQ', playlistId: 'PLgawtcOBBjr-KZydGcRYKOGXvR7xKhm1m' },
+    { key: 'horizons', name: 'Horizons', channelId: 'UC6ZFN9Tx6xh-skXCuRHCDpQ', playlistId: 'PLgawtcOBBjr9HbB4Qa0Y_BDsCADC_v00X' },
   ];
   const SEEK_BACK = 15;
   const SEEK_FWD = 30;
@@ -168,7 +170,7 @@
     current = {
       show,
       videoId: ep ? ep.videoId : null,
-      playlistId: ep ? null : 'UU' + show.channelId.slice(2),
+      playlistId: ep ? null : (show.playlistId || 'UU' + show.channelId.slice(2)),
       title: ep ? show.name + ' \u00b7 ' + episodeDate(ep.title) : show.name + ' (latest uploads)',
     };
 

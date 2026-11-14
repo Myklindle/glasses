@@ -15,6 +15,7 @@ Usage:
     python3 scripts/update_latest.py --debug    # also print what was matched
 """
 import datetime
+import functools
 import json
 import os
 import re
@@ -33,6 +34,17 @@ SHOWS = {
         "channel": "UC2s0uKOc2WgB9eGta7cUUEA",
         "title": re.compile(r"washington week.*full episode", re.I),
     },
+    # PBS News keeps each of these in a playlist of full episodes, newest first.
+    # Upload titles are topics (no show name), so the label is built from the
+    # upload date instead.
+    "compasspoints": {
+        "playlist": "PLgawtcOBBjr-KZydGcRYKOGXvR7xKhm1m",
+        "name": "Compass Points",
+    },
+    "horizons": {
+        "playlist": "PLgawtcOBBjr9HbB4Qa0Y_BDsCADC_v00X",
+        "name": "Horizons",
+    },
 }
 
 HEADERS = {
@@ -48,6 +60,7 @@ HEADERS = {
 DEBUG = "--debug" in sys.argv
 
 
+@functools.lru_cache(maxsize=None)
 def fetch(url):
     req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=30) as resp:
@@ -88,7 +101,23 @@ def videos(node):
             stack.extend(reversed(cur))
 
 
+MONTHS = ["Jan.", "Feb.", "March", "April", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."]
+def newest_in_playlist(show):
+    html = fetch("https://www.youtube.com/playlist?list=" + show["playlist"])
+    for vid, _title in videos(initial_data(html)):
+        page = fetch("https://www.youtube.com/watch?v=" + vid)
+        m = re.search(r'"publishDate":"(\d{4})-(\d{2})-(\d{2})', page)
+        if not m:
+            raise RuntimeError("publish date not found for " + vid)
+        year, month, day = (int(g) for g in m.groups())
+        title = "%s full episode, %s %d, %d" % (show["name"], MONTHS[month - 1], day, year)
+        if DEBUG:
+            print("  playlist top: %s %s" % (vid, title))
+        return {"videoId": vid, "title": title}
+    raise RuntimeError("playlist is empty (page layout changed or blocked)")
 def newest_full_episode(show):
+    if "playlist" in show:
+        return newest_in_playlist(show)
     html = fetch("https://www.youtube.com/channel/%s/videos" % show["channel"])
     seen = set()
     for index, (vid, title) in enumerate(videos(initial_data(html))):
