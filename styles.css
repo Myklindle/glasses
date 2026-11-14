@@ -123,6 +123,18 @@ body {
   gap: 0.6rem;
 }
 
+.controls.two { grid-template-columns: repeat(2, 1fr); }
+
+.chapter {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Shared button look */
 
 .button {

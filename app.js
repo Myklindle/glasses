@@ -20,7 +20,11 @@
     player: $('player'), title: $('now-playing'), mount: $('player-mount'),
     playerStatus: $('player-status'), controls: $('controls'),
     back: $('btn-back'), toggle: $('btn-toggle'), fwd: $('btn-fwd'),
+    chapter: $('chapter'), storyControls: $('story-controls'),
+    prev: $('btn-prev'), next: $('btn-next'),
   };
+
+  const NO_CHAPTER_JUMP = 300; // seconds, when an episode has no chapters
 
   let episodes = {};     // show key -> { videoId, title }, from latest.json
   let current = null;    // what the player screen is showing
@@ -29,6 +33,10 @@
   let playerToken = 0;   // guards against async work finishing after the player closed
   let saveTimer = null;
   let apiPromise = null;
+  let chapters = [];     // [{start, title}] for the current episode, possibly empty
+  let pendingSeek = null; // {idx, at}: a chapter jump whose time the player may not report yet
+  let uiTimer = null;
+  let shownIdx = -2;
 
   // ---------- small helpers ----------
 
@@ -168,6 +176,13 @@
     els.player.hidden = false;
     els.title.textContent = current.title;
     els.controls.hidden = false;
+    els.storyControls.hidden = false;
+    chapters = window.Chapters.clean(ep && ep.chapters);
+    pendingSeek = null;
+    shownIdx = -2;
+    els.prev.textContent = chapters.length ? 'Prev story' : '\u2212' + NO_CHAPTER_JUMP / 60 + ' min';
+    els.next.textContent = chapters.length ? 'Next story' : '+' + NO_CHAPTER_JUMP / 60 + ' min';
+    els.chapter.hidden = true;
     els.toggle.textContent = 'Play';
     setPlayerStatus('Loading\u2026');
     startPlayer();
@@ -177,6 +192,16 @@
   function setPlayerStatus(text) {
     els.playerStatus.textContent = text;
     els.playerStatus.hidden = !text;
+  }
+
+  // A short message that clears itself, for things like "last story".
+  let flashTimer = null;
+  function flashStatus(text) {
+    setPlayerStatus(text);
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => {
+      if (els.playerStatus.textContent === text) setPlayerStatus('');
+    }, 3000);
   }
 
   function savedStart() {
@@ -254,6 +279,8 @@
     player.playVideo(); // autoplay can be refused; the Play button covers that
     clearInterval(saveTimer);
     saveTimer = setInterval(saveNow, 5000);
+    clearInterval(uiTimer);
+    uiTimer = setInterval(updateChapterLabel, 1000);
   }
 
   function onPlayerState(state) {
@@ -284,6 +311,8 @@
     frame.title = current.title;
     els.mount.replaceChildren(frame);
     els.controls.hidden = true;
+    els.storyControls.hidden = true;
+    els.chapter.hidden = true;
     setPlayerStatus('Basic player (YouTube API unavailable). Resume is off.');
   }
 
@@ -298,6 +327,7 @@
   function stopPlayer() {
     playerToken++;
     clearInterval(saveTimer);
+    clearInterval(uiTimer);
     saveNow();
     try { if (player && player.destroy) player.destroy(); } catch (e) { /* ignore */ }
     player = null;
@@ -322,6 +352,53 @@
   els.back.addEventListener('click', () => seekBy(-SEEK_BACK));
   els.fwd.addEventListener('click', () => seekBy(SEEK_FWD));
   els.retry.addEventListener('click', init);
+
+  // ---------- story (chapter) skipping ----------
+
+  // Which chapter we're in and how far into it. Right after a jump the player can
+  // still report the old time, so trust the jump for a couple of seconds.
+  function where() {
+    if (pendingSeek && Date.now() - pendingSeek.at < 2000) {
+      return { idx: pendingSeek.idx, secondsIn: 0 };
+    }
+    const t = player.getCurrentTime();
+    const idx = window.Chapters.indexAt(chapters, t);
+    return { idx, secondsIn: idx >= 0 ? t - chapters[idx].start : t };
+  }
+
+  function jumpToChapter(idx) {
+    pendingSeek = { idx, at: Date.now() };
+    player.seekTo(chapters[idx].start, true);
+    showChapter(idx);
+  }
+
+  function showChapter(idx) {
+    shownIdx = idx;
+    if (idx < 0) { els.chapter.hidden = true; return; }
+    els.chapter.textContent = (idx + 1) + '/' + chapters.length + '  ' + chapters[idx].title;
+    els.chapter.hidden = false;
+  }
+
+  function updateChapterLabel() {
+    if (!chapters.length || !player || typeof player.getCurrentTime !== 'function') return;
+    let idx;
+    try { idx = where().idx; } catch (e) { return; }
+    if (idx !== shownIdx) showChapter(idx);
+  }
+
+  els.next.addEventListener('click', () => {
+    if (!player || typeof player.getCurrentTime !== 'function') return;
+    if (!chapters.length) { seekBy(NO_CHAPTER_JUMP); return; }
+    const to = window.Chapters.nextIndex(chapters, where().idx);
+    if (to >= 0) jumpToChapter(to); else flashStatus('That was the last story.');
+  });
+
+  els.prev.addEventListener('click', () => {
+    if (!player || typeof player.getCurrentTime !== 'function') return;
+    if (!chapters.length) { seekBy(-NO_CHAPTER_JUMP); return; }
+    const w = where();
+    jumpToChapter(window.Chapters.prevIndex(chapters, w.idx, w.secondsIn));
+  });
 
   // ---------- history: the glasses' Back action calls history.back() ----------
 

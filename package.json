@@ -1,0 +1,8 @@
+{
+  "name": "mikes-news-glasses",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test tests/chapters.test.js"
+  }
+}

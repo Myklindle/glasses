@@ -27,14 +27,20 @@
       <h1 id="now-playing" class="player-title"></h1>
       <div id="player-mount" class="video"></div>
       <p id="player-status" class="status" role="status" hidden></p>
+      <p id="chapter" class="chapter" hidden></p>
       <div id="controls" class="controls">
         <button id="btn-back" type="button" class="button">&minus;15s</button>
         <button id="btn-toggle" type="button" class="button">Pause</button>
         <button id="btn-fwd" type="button" class="button">+30s</button>
       </div>
+      <div id="story-controls" class="controls two">
+        <button id="btn-prev" type="button" class="button">Prev story</button>
+        <button id="btn-next" type="button" class="button">Next story</button>
+      </div>
     </section>
 
   </main>
+  <script src="chapters.js" defer></script>
   <script src="app.js" defer></script>
 </body>
 </html>

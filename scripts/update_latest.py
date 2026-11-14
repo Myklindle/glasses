@@ -102,6 +102,62 @@ def newest_full_episode(show):
     raise RuntimeError("no full episode in the %d most recent uploads" % len(seen))
 
 
+def find_key(node, key):
+    """Yield every value stored under `key` anywhere in a nested structure."""
+    stack = [node]
+    while stack:
+        cur = stack.pop()
+        if isinstance(cur, dict):
+            if key in cur:
+                yield cur[key]
+            stack.extend(cur.values())
+        elif isinstance(cur, list):
+            stack.extend(cur)
+
+
+TIMESTAMP_LINE = re.compile(
+    r"^\s*\(?(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\)?\s*[-\u2013\u2014:]?\s*(.+?)\s*$"
+)
+
+
+def chapters_from_description(html):
+    """Fallback: read "00:00- Title" style lines from the video description."""
+    m = re.search(r'"shortDescription":"(.*?)","isCrawlable"', html, re.S)
+    if not m:
+        return []
+    try:
+        text = json.loads('"' + m.group(1) + '"')
+    except ValueError:
+        return []
+    out = []
+    for line in text.splitlines():
+        t = TIMESTAMP_LINE.match(line)
+        if t:
+            hours, minutes, seconds, title = t.groups()
+            start = int(hours or 0) * 3600 + int(minutes) * 60 + int(seconds)
+            out.append({"start": start, "title": title})
+    return out
+
+
+def episode_chapters(video_id):
+    """Return [{"start": seconds, "title": str}, ...] for a video, or []."""
+    html = fetch("https://www.youtube.com/watch?v=" + video_id)
+    chapters, seen = [], set()
+    for item in find_key(initial_data(html), "macroMarkersListItemRenderer"):
+        title = (item.get("title") or {}).get("simpleText")
+        start = ((item.get("onTap") or {}).get("watchEndpoint") or {}).get("startTimeSeconds")
+        if title and isinstance(start, int) and start not in seen:
+            seen.add(start)
+            chapters.append({"start": start, "title": title})
+    if not chapters:
+        # YouTube's own rule: chapters need 3+ timestamps, the first at 0:00.
+        chapters = chapters_from_description(html)
+        if len(chapters) < 3 or chapters[0]["start"] != 0:
+            chapters = []
+    chapters.sort(key=lambda c: c["start"])
+    return chapters
+
+
 def main():
     try:
         with open(OUT, encoding="utf-8") as fh:
@@ -120,6 +176,19 @@ def main():
             if key not in shows_now:
                 missing = True
             continue
+
+        # Chapters are optional. Keep the old ones if this lookup fails or comes back
+        # empty for the same video (PBS can add chapters some time after upload).
+        previous = shows_now.get(key) or {}
+        try:
+            chapters = episode_chapters(found["videoId"])
+        except Exception as exc:
+            print("::warning::%s chapters lookup failed: %s" % (key, exc))
+            chapters = []
+        if not chapters and previous.get("videoId") == found["videoId"]:
+            chapters = previous.get("chapters", [])
+        found["chapters"] = chapters
+
         if shows_now.get(key) != found:
             print("%s: %s" % (key, found["title"]))
             shows_now[key] = found

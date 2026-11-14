@@ -8,6 +8,7 @@ Two buttons: the latest **PBS News Hour** full episode and the latest **Washingt
 - `latest.json`: the current episode IDs. Refreshed by `scripts/update_latest.py`, which reads each channel's public Videos tab and picks the newest upload titled "... full episode". No API key.
 - `.github/workflows/pages.yml`: every 20 minutes (and on every push) it refreshes `latest.json`, commits it if changed, and deploys to GitHub Pages. Scheduled runs with nothing new skip the deploy.
 - `.well-known/meta-wearables-manifest.json` and `icons/news.svg`: the app name and icon the glasses read.
+- Story skipping: the lookup script also reads each episode's chapters (News Hour has one per story) into `latest.json`. **Prev story** and **Next story** jump between them, and a line under the video shows which story you're in. Episodes without chapters (Washington Week) get **-5 min** and **+5 min** instead. The chapter math lives in `chapters.js`.
 - If `latest.json` can't be loaded, each card opens that channel's latest uploads instead. If the YouTube API script can't load, the app falls back to a plain embed with YouTube's own controls.
 
 ## Publish (one time)
@@ -41,6 +42,7 @@ Two buttons: the latest **PBS News Hour** full episode and the latest **Washingt
 ```sh
 python3 -m http.server 8765      # then open http://127.0.0.1:8765/
 python3 scripts/update_latest.py --debug
+node --test tests/chapters.test.js      # chapter skipping logic
 ```
 
 If the script reports a certificate error on a python.org Python on macOS, run it with `SSL_CERT_FILE=/etc/ssl/cert.pem`.
