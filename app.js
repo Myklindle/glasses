@@ -19,7 +19,7 @@
     homeStatus: $('home-status'), retry: $('retry'),
     player: $('player'), title: $('now-playing'), mount: $('player-mount'),
     playerStatus: $('player-status'), controls: $('controls'),
-    back: $('btn-back'), toggle: $('btn-toggle'), fwd: $('btn-fwd'), yt: $('link-yt'),
+    back: $('btn-back'), toggle: $('btn-toggle'), fwd: $('btn-fwd'),
   };
 
   let episodes = {};     // show key -> { videoId, title }, from latest.json
@@ -167,9 +167,6 @@
     els.home.hidden = true;
     els.player.hidden = false;
     els.title.textContent = current.title;
-    els.yt.href = current.videoId
-      ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(current.videoId)
-      : 'https://www.youtube.com/playlist?list=' + encodeURIComponent(current.playlistId);
     els.controls.hidden = false;
     els.toggle.textContent = 'Play';
     setPlayerStatus('Loading\u2026');
@@ -272,8 +269,7 @@
   }
 
   function onPlayerError(code) {
-    setPlayerStatus("Can't play this video here (error " + code + "). Try Open in YouTube.");
-    els.yt.focus({ preventScroll: true });
+    setPlayerStatus("Can't play this video here (error " + code + ").");
   }
 
   // Used when the YouTube API script can't load: a plain embed with YouTube's own controls.
@@ -289,7 +285,6 @@
     els.mount.replaceChildren(frame);
     els.controls.hidden = true;
     setPlayerStatus('Basic player (YouTube API unavailable). Resume is off.');
-    els.yt.focus({ preventScroll: true });
   }
 
   function saveNow() {

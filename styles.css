@@ -142,8 +142,6 @@ body {
   cursor: pointer;
 }
 
-.button.link { min-block-size: 2.8rem; font-size: 1.05rem; }
-
 /* Focus: thick white outline, lighter fill, and white border, so selection
    shows through shape and brightness and not through color alone. */
 .card:focus-visible,

@@ -33,7 +33,8 @@ Two buttons: the latest **PBS News Hour** full episode and the latest **Washingt
 - Do `-15s`, `Play/Pause` and `+30s` respond once per press?
 - Does Back return to the home screen, and does a second Back leave the app?
 - Is the text readable outdoors and indoors? Are focus outlines visible at the edges?
-- If playback fails: the status line shows YouTube's error code, and **Open in YouTube** is the fallback.
+- If playback fails: the status line shows YouTube's error code.
+- An "Open in YouTube" link was tried and removed: the glasses' browser did not follow it.
 
 ## Run locally
 
