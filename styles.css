@@ -135,6 +135,14 @@ body {
   text-overflow: ellipsis;
 }
 
+/* Auto-hide: fade title, chapter and buttons, leaving only the video. */
+.player-title, .chapter, .controls { transition: opacity 0.6s ease; }
+.screen.idle .player-title,
+.screen.idle .chapter,
+.screen.idle .controls { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .player-title, .chapter, .controls { transition: none; }
+}
 /* Shared button look */
 
 .button {

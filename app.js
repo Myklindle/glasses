@@ -39,6 +39,9 @@
   let pendingSeek = null; // {idx, at}: a chapter jump whose time the player may not report yet
   let uiTimer = null;
   let shownIdx = -2;
+  const IDLE_MS = 4000;  // hide the overlay this long after the last input while playing
+  let idleTimer = null;
+  let overlayHidden = false;
 
   // ---------- small helpers ----------
 
@@ -188,9 +191,44 @@
     els.toggle.textContent = 'Play';
     setPlayerStatus('Loading\u2026');
     startPlayer();
+    wakeOverlay();
     els.toggle.focus({ preventScroll: true });
   }
 
+  // ---------- auto-hiding overlay: title, chapter and buttons fade out during playback ----------
+  // Fades with opacity only, so layout does not shift and the focused button keeps focus.
+  function setOverlayHidden(hide) {
+    overlayHidden = hide;
+    els.player.classList.toggle('idle', hide);
+  }
+  function wakeOverlay() {
+    setOverlayHidden(false);
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      let state = -1;
+      try { state = player && player.getPlayerState(); } catch (e) { /* ignore */ }
+      if (els.player.hidden || !els.mount.classList.contains('api')) return;
+      if (state === PLAYING) setOverlayHidden(true); else wakeOverlay(); // stay up while paused
+    }, IDLE_MS);
+  }
+  function stopOverlayTimer() {
+    clearTimeout(idleTimer);
+    setOverlayHidden(false);
+  }
+  // Any input from the band (key, tap, pointer, focus move) wakes the overlay. The input
+  // that wakes it is not passed on as a button press, so a hidden button is never hit blind.
+  function onWakeInput(e) {
+    if (els.player.hidden) return;
+    const wasHidden = overlayHidden;
+    wakeOverlay();
+    if (!wasHidden) return;
+    const activate = e.type === 'click' || e.type === 'pointerup' || e.type === 'mouseup'
+      || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '));
+    if (activate) { e.preventDefault(); e.stopPropagation(); }
+  }
+  for (const type of ['keydown', 'click', 'pointerdown', 'pointermove', 'touchstart', 'wheel', 'focusin']) {
+    document.addEventListener(type, onWakeInput, { capture: true, passive: false });
+  }
   function setPlayerStatus(text) {
     els.playerStatus.textContent = text;
     els.playerStatus.hidden = !text;
@@ -315,6 +353,7 @@
     els.controls.hidden = true;
     els.storyControls.hidden = true;
     els.chapter.hidden = true;
+    stopOverlayTimer();
     setPlayerStatus('Basic player (YouTube API unavailable). Resume is off.');
   }
 
@@ -330,6 +369,7 @@
     playerToken++;
     clearInterval(saveTimer);
     clearInterval(uiTimer);
+    stopOverlayTimer();
     saveNow();
     try { if (player && player.destroy) player.destroy(); } catch (e) { /* ignore */ }
     player = null;
