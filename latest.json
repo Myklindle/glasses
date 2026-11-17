@@ -1,10 +1,43 @@
 {
-  "updated": "2026-11-17T02:12:47Z",
+  "updated": "2026-11-17T10:45:50Z",
   "shows": {
     "newshour": {
       "videoId": "2jGv-4tg9x8",
       "title": "PBS News Hour full episode, Nov. 16, 2026",
-      "chapters": []
+      "chapters": [
+        {
+          "start": 0,
+          "title": "Introduction"
+        },
+        {
+          "start": 334,
+          "title": "What went wrong with ATC and will more FAA funding fix it?"
+        },
+        {
+          "start": 748,
+          "title": "News Wrap: Trump departs for trip to Asia"
+        },
+        {
+          "start": 1110,
+          "title": "U.S. closing loophole that allowed China access to AI chips"
+        },
+        {
+          "start": 1586,
+          "title": "Tamara Keith and Amy Walter on Trump’s Xi-Putin summit"
+        },
+        {
+          "start": 2059,
+          "title": "Why many white South African who left are repatriating"
+        },
+        {
+          "start": 2609,
+          "title": "‘It’s close to bulletproof’ doctor says of MMR vaccine"
+        },
+        {
+          "start": 2866,
+          "title": "Documentary explores history of crime and punishment in U.S."
+        }
+      ]
     },
     "washingtonweek": {
       "videoId": "aPaDJiiMNMM",
