@@ -1,51 +1,10 @@
 {
-  "updated": "2026-11-14T11:01:30Z",
+  "updated": "2026-11-17T02:12:47Z",
   "shows": {
     "newshour": {
-      "videoId": "mkCF59W4A4g",
-      "title": "PBS News Hour full episode, Nov. 13, 2026",
-      "chapters": [
-        {
-          "start": 0,
-          "title": "Introduction"
-        },
-        {
-          "start": 167,
-          "title": "FAA issues rare nationwide ground stop"
-        },
-        {
-          "start": 426,
-          "title": "News Wrap: Tanker crashes into river cruise in New Orleans"
-        },
-        {
-          "start": 797,
-          "title": "Bessent says Lutnick failed to stop China from getting chips"
-        },
-        {
-          "start": 1110,
-          "title": "Housing costs squeeze Americans out of market"
-        },
-        {
-          "start": 1657,
-          "title": "Does Van Hollen have enough support to win leadership race?"
-        },
-        {
-          "start": 1844,
-          "title": "ICE touts record number of deportations in agency’s history"
-        },
-        {
-          "start": 2200,
-          "title": "Brooks and Marcus on how GOP responds to midterm losses"
-        },
-        {
-          "start": 2733,
-          "title": "Anthony Roth Costanzo brings new ideas to opera"
-        },
-        {
-          "start": 3260,
-          "title": "Remembering Gwen Ifill and her legacy that continues to guide our journalism"
-        }
-      ]
+      "videoId": "2jGv-4tg9x8",
+      "title": "PBS News Hour full episode, Nov. 16, 2026",
+      "chapters": []
     },
     "washingtonweek": {
       "videoId": "aPaDJiiMNMM",
