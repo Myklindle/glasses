@@ -1,41 +1,45 @@
 {
-  "updated": "2026-11-17T10:45:50Z",
+  "updated": "2026-11-18T01:50:26Z",
   "shows": {
     "newshour": {
-      "videoId": "2jGv-4tg9x8",
-      "title": "PBS News Hour full episode, Nov. 16, 2026",
+      "videoId": "r2E6knuBNdk",
+      "title": "PBS News Hour full episode, Nov. 17, 2026",
       "chapters": [
         {
           "start": 0,
           "title": "Introduction"
         },
         {
-          "start": 334,
-          "title": "What went wrong with ATC and will more FAA funding fix it?"
+          "start": 166,
+          "title": "Tech problems reveal America's digital vulnerabilities"
         },
         {
-          "start": 748,
-          "title": "News Wrap: Trump departs for trip to Asia"
+          "start": 600,
+          "title": "A look at China's technology industry amid AI race with U.S."
         },
         {
-          "start": 1110,
-          "title": "U.S. closing loophole that allowed China access to AI chips"
+          "start": 1162,
+          "title": "News Wrap: U.S. no longer considered a measles-free nation"
         },
         {
-          "start": 1586,
-          "title": "Tamara Keith and Amy Walter on Trump’s Xi-Putin summit"
+          "start": 1493,
+          "title": "What's in Trump's $50B air traffic control overhaul plan"
         },
         {
-          "start": 2059,
-          "title": "Why many white South African who left are repatriating"
+          "start": 1767,
+          "title": "Biden releases memoir recounting his presidency"
         },
         {
-          "start": 2609,
-          "title": "‘It’s close to bulletproof’ doctor says of MMR vaccine"
+          "start": 2267,
+          "title": "Study reveals energy demands and emissions of data centers"
         },
         {
-          "start": 2866,
-          "title": "Documentary explores history of crime and punishment in U.S."
+          "start": 2623,
+          "title": "North Dakota museum gives Great Plains artists bigger stage"
+        },
+        {
+          "start": 3009,
+          "title": "What humans can learn from a 194-year-old tortoise"
         }
       ]
     },
