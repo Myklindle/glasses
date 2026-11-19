@@ -1,45 +1,49 @@
 {
-  "updated": "2026-11-18T01:50:26Z",
+  "updated": "2026-11-19T00:43:01Z",
   "shows": {
     "newshour": {
-      "videoId": "r2E6knuBNdk",
-      "title": "PBS News Hour full episode, Nov. 17, 2026",
+      "videoId": "XetehXGc11c",
+      "title": "PBS News Hour full episode, Nov. 18, 2026",
       "chapters": [
         {
           "start": 0,
-          "title": "Introduction"
+          "title": "INTRO"
         },
         {
-          "start": 166,
-          "title": "Tech problems reveal America's digital vulnerabilities"
+          "start": 143,
+          "title": "Trump lands in China for trade talks and high-stakes summit"
         },
         {
-          "start": 600,
-          "title": "A look at China's technology industry amid AI race with U.S."
+          "start": 525,
+          "title": "Ex-staffer on how presidents prepare for talks with leaders"
         },
         {
-          "start": 1162,
-          "title": "News Wrap: U.S. no longer considered a measles-free nation"
+          "start": 879,
+          "title": "News Wrap"
         },
         {
-          "start": 1493,
-          "title": "What's in Trump's $50B air traffic control overhaul plan"
+          "start": 1236,
+          "title": "Outages & Anxieties"
         },
         {
-          "start": 1767,
-          "title": "Biden releases memoir recounting his presidency"
+          "start": 1960,
+          "title": "Fighting Deepfakes"
         },
         {
-          "start": 2267,
-          "title": "Study reveals energy demands and emissions of data centers"
+          "start": 2364,
+          "title": "Voyager’s Journey"
         },
         {
-          "start": 2623,
-          "title": "North Dakota museum gives Great Plains artists bigger stage"
+          "start": 2729,
+          "title": "Grand Theft Auto VI"
         },
         {
-          "start": 3009,
-          "title": "What humans can learn from a 194-year-old tortoise"
+          "start": 3031,
+          "title": "Settle-In"
+        },
+        {
+          "start": 3263,
+          "title": "Goodnight"
         }
       ]
     },
