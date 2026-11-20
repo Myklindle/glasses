@@ -1,48 +1,48 @@
 {
-  "updated": "2026-11-19T23:45:58Z",
+  "updated": "2026-11-20T04:49:46Z",
   "shows": {
     "newshour": {
-      "videoId": "XetehXGc11c",
-      "title": "PBS News Hour full episode, Nov. 18, 2026",
+      "videoId": "56GuOAuCpMU",
+      "title": "PBS News Hour full episode, Nov. 19, 2026",
       "chapters": [
         {
           "start": 0,
           "title": "INTRO"
         },
         {
-          "start": 143,
-          "title": "Trump lands in China for trade talks and high-stakes summit"
+          "start": 165,
+          "title": "Inside the historic summit between Trump, Xi and Putin"
         },
         {
-          "start": 525,
-          "title": "Ex-staffer on how presidents prepare for talks with leaders"
+          "start": 449,
+          "title": "Experts assess what was addressed at trilateral meeting"
         },
         {
-          "start": 879,
+          "start": 897,
           "title": "News Wrap"
         },
         {
-          "start": 1236,
-          "title": "Outages & Anxieties"
+          "start": 1255,
+          "title": "Record Launch"
         },
         {
-          "start": 1960,
-          "title": "Fighting Deepfakes"
+          "start": 1662,
+          "title": "Genocide Ruling"
         },
         {
-          "start": 2364,
-          "title": "Voyager’s Journey"
+          "start": 2189,
+          "title": "Power Shift"
         },
         {
-          "start": 2729,
-          "title": "Grand Theft Auto VI"
+          "start": 2541,
+          "title": "Book Prize"
         },
         {
-          "start": 3031,
-          "title": "Settle-In"
+          "start": 2890,
+          "title": "Origins of House Music"
         },
         {
-          "start": 3263,
+          "start": 3319,
           "title": "Goodnight"
         }
       ]
