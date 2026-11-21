@@ -1,49 +1,41 @@
 {
-  "updated": "2026-11-20T04:49:46Z",
+  "updated": "2026-11-21T02:48:25Z",
   "shows": {
     "newshour": {
-      "videoId": "56GuOAuCpMU",
-      "title": "PBS News Hour full episode, Nov. 19, 2026",
+      "videoId": "bcxbRdcUeFo",
+      "title": "PBS News Hour full episode, Nov. 20, 2026",
       "chapters": [
         {
           "start": 0,
           "title": "INTRO"
         },
         {
-          "start": 165,
-          "title": "Inside the historic summit between Trump, Xi and Putin"
+          "start": 161,
+          "title": "Trump Agenda"
         },
         {
-          "start": 449,
-          "title": "Experts assess what was addressed at trilateral meeting"
-        },
-        {
-          "start": 897,
+          "start": 421,
           "title": "News Wrap"
         },
         {
-          "start": 1255,
-          "title": "Record Launch"
+          "start": 828,
+          "title": "Outages & Anxieties"
         },
         {
-          "start": 1662,
-          "title": "Genocide Ruling"
+          "start": 1248,
+          "title": "One on One"
         },
         {
-          "start": 2189,
-          "title": "Power Shift"
+          "start": 1903,
+          "title": "Brooks & Capehart"
         },
         {
-          "start": 2541,
-          "title": "Book Prize"
+          "start": 2563,
+          "title": "The Sixth Floor Museum"
         },
         {
-          "start": 2890,
-          "title": "Origins of House Music"
-        },
-        {
-          "start": 3319,
-          "title": "Goodnight"
+          "start": 3037,
+          "title": "Goodnight + Promo"
         }
       ]
     },
