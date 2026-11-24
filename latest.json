@@ -1,10 +1,47 @@
 {
-  "updated": "2026-11-24T01:10:30Z",
+  "updated": "2026-11-24T10:57:17Z",
   "shows": {
     "newshour": {
       "videoId": "hzxVR4_4VRU",
       "title": "PBS News Hour full episode, Nov. 23, 2026",
-      "chapters": []
+      "chapters": [
+        {
+          "start": 0,
+          "title": "Introduction"
+        },
+        {
+          "start": 137,
+          "title": "Why Trump pushed for Jensen Huang's return to Nvidia"
+        },
+        {
+          "start": 450,
+          "title": "Experts on national security implications of Huang's return"
+        },
+        {
+          "start": 935,
+          "title": "News Wrap: Storms threaten Thanksgiving travel"
+        },
+        {
+          "start": 1261,
+          "title": "Seattle airport arrests renew protests over ICE tactics"
+        },
+        {
+          "start": 1701,
+          "title": "Drought pushes millions in Afghanistan deeper into crisis"
+        },
+        {
+          "start": 2274,
+          "title": "Tamara Keith and Amy Walter on Trump and Huang's return"
+        },
+        {
+          "start": 2751,
+          "title": "The science of how pets see and respond to screens"
+        },
+        {
+          "start": 3075,
+          "title": "What's driving up the cost of Thanksgiving dinner"
+        }
+      ]
     },
     "washingtonweek": {
       "videoId": "ZHdrUGZX_jw",
