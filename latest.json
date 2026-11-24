@@ -1,43 +1,10 @@
 {
-  "updated": "2026-11-21T17:44:51Z",
+  "updated": "2026-11-24T01:10:30Z",
   "shows": {
     "newshour": {
-      "videoId": "bcxbRdcUeFo",
-      "title": "PBS News Hour full episode, Nov. 20, 2026",
-      "chapters": [
-        {
-          "start": 0,
-          "title": "INTRO"
-        },
-        {
-          "start": 161,
-          "title": "Trump Agenda"
-        },
-        {
-          "start": 421,
-          "title": "News Wrap"
-        },
-        {
-          "start": 828,
-          "title": "Outages & Anxieties"
-        },
-        {
-          "start": 1248,
-          "title": "One on One"
-        },
-        {
-          "start": 1903,
-          "title": "Brooks & Capehart"
-        },
-        {
-          "start": 2563,
-          "title": "The Sixth Floor Museum"
-        },
-        {
-          "start": 3037,
-          "title": "Goodnight + Promo"
-        }
-      ]
+      "videoId": "hzxVR4_4VRU",
+      "title": "PBS News Hour full episode, Nov. 23, 2026",
+      "chapters": []
     },
     "washingtonweek": {
       "videoId": "ZHdrUGZX_jw",
