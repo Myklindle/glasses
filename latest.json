@@ -1,10 +1,47 @@
 {
-  "updated": "2026-11-25T03:57:51Z",
+  "updated": "2026-11-25T13:52:42Z",
   "shows": {
     "newshour": {
       "videoId": "D4h35g_yrKk",
       "title": "PBS News Hour full episode, Nov. 24, 2026",
-      "chapters": []
+      "chapters": [
+        {
+          "start": 0,
+          "title": "Introduction"
+        },
+        {
+          "start": 167,
+          "title": "How Trump may have profited from Huang's return to Nvidia"
+        },
+        {
+          "start": 449,
+          "title": "What's next for Nvidia and Jensen Huang"
+        },
+        {
+          "start": 815,
+          "title": "News Wrap: California king tides could be biggest in decades"
+        },
+        {
+          "start": 1156,
+          "title": "Army plans detonation in Iowa despite residents' concerns"
+        },
+        {
+          "start": 1500,
+          "title": "N.C. Democrat reflects on flipping longtime GOP seat"
+        },
+        {
+          "start": 1858,
+          "title": "Thousands of immigrants with legal status lose Medicaid"
+        },
+        {
+          "start": 2304,
+          "title": "Bob Woodward reveals why he's naming sources in new book"
+        },
+        {
+          "start": 2843,
+          "title": "'Deals Drama Drive' traces Mondavi role in Napa Valley boom"
+        }
+      ]
     },
     "washingtonweek": {
       "videoId": "ZHdrUGZX_jw",
