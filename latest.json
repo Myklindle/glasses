@@ -1,45 +1,49 @@
 {
-  "updated": "2026-11-25T13:52:42Z",
+  "updated": "2026-11-26T04:35:34Z",
   "shows": {
     "newshour": {
-      "videoId": "D4h35g_yrKk",
-      "title": "PBS News Hour full episode, Nov. 24, 2026",
+      "videoId": "FCXErIo9PRE",
+      "title": "PBS News Hour full episode, Nov. 25, 2026",
       "chapters": [
         {
           "start": 0,
-          "title": "Introduction"
+          "title": "INTRO"
         },
         {
-          "start": 167,
-          "title": "How Trump may have profited from Huang's return to Nvidia"
+          "start": 143,
+          "title": "After the Blast"
         },
         {
-          "start": 449,
-          "title": "What's next for Nvidia and Jensen Huang"
+          "start": 561,
+          "title": "Trump’s Tariffs"
         },
         {
-          "start": 815,
-          "title": "News Wrap: California king tides could be biggest in decades"
+          "start": 994,
+          "title": "News Wrap"
         },
         {
-          "start": 1156,
-          "title": "Army plans detonation in Iowa despite residents' concerns"
+          "start": 1357,
+          "title": "War in the Holy Land"
         },
         {
-          "start": 1500,
-          "title": "N.C. Democrat reflects on flipping longtime GOP seat"
+          "start": 1913,
+          "title": "Settle-In"
         },
         {
-          "start": 1858,
-          "title": "Thousands of immigrants with legal status lose Medicaid"
+          "start": 2313,
+          "title": "Making of a Maestro"
         },
         {
-          "start": 2304,
-          "title": "Bob Woodward reveals why he's naming sources in new book"
+          "start": 2747,
+          "title": "Cranberry Jam"
         },
         {
-          "start": 2843,
-          "title": "'Deals Drama Drive' traces Mondavi role in Napa Valley boom"
+          "start": 3003,
+          "title": "“Between the Balloons”"
+        },
+        {
+          "start": 3286,
+          "title": "Goodnight"
         }
       ]
     },
