@@ -1,48 +1,48 @@
 {
-  "updated": "2026-11-26T04:35:34Z",
+  "updated": "2026-11-27T05:05:03Z",
   "shows": {
     "newshour": {
-      "videoId": "FCXErIo9PRE",
-      "title": "PBS News Hour full episode, Nov. 25, 2026",
+      "videoId": "wJL1wUDX-tE",
+      "title": "PBS News Hour full episode, July 26, 2026",
       "chapters": [
         {
           "start": 0,
           "title": "INTRO"
         },
         {
-          "start": 143,
-          "title": "After the Blast"
+          "start": 162,
+          "title": "Stormy Thanksgiving"
         },
         {
-          "start": 561,
-          "title": "Trump’s Tariffs"
-        },
-        {
-          "start": 994,
+          "start": 363,
           "title": "News Wrap"
         },
         {
-          "start": 1357,
-          "title": "War in the Holy Land"
+          "start": 731,
+          "title": "Common Ground"
         },
         {
-          "start": 1913,
+          "start": 1211,
+          "title": "Political Climate"
+        },
+        {
+          "start": 1580,
+          "title": "Women at War"
+        },
+        {
+          "start": 2049,
+          "title": "Caregiving"
+        },
+        {
+          "start": 2559,
           "title": "Settle-In"
         },
         {
-          "start": 2313,
-          "title": "Making of a Maestro"
+          "start": 3055,
+          "title": "Holiday Shopping"
         },
         {
-          "start": 2747,
-          "title": "Cranberry Jam"
-        },
-        {
-          "start": 3003,
-          "title": "“Between the Balloons”"
-        },
-        {
-          "start": 3286,
+          "start": 3326,
           "title": "Goodnight"
         }
       ]
