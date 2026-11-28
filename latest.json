@@ -1,49 +1,41 @@
 {
-  "updated": "2026-11-27T23:28:27Z",
+  "updated": "2026-11-28T04:55:45Z",
   "shows": {
     "newshour": {
-      "videoId": "wJL1wUDX-tE",
-      "title": "PBS News Hour full episode, Nov. 26, 2026",
+      "videoId": "ulzFd0XvWGQ",
+      "title": "PBS News Hour full episode, Nov. 27, 2026",
       "chapters": [
         {
           "start": 0,
-          "title": "INTRO"
+          "title": "Introduction"
         },
         {
-          "start": 162,
-          "title": "Stormy Thanksgiving"
+          "start": 66,
+          "title": "News Wrap: Crews work to restore power after storm"
         },
         {
-          "start": 363,
-          "title": "News Wrap"
+          "start": 451,
+          "title": "American consumers face pitfalls with 'buy now, pay later'"
         },
         {
-          "start": 731,
-          "title": "Common Ground"
+          "start": 938,
+          "title": "How online gambling is changing the game"
         },
         {
-          "start": 1211,
-          "title": "Political Climate"
+          "start": 1402,
+          "title": "Brooks and Capehart on new tariffs and Democratic leadership"
         },
         {
-          "start": 1580,
-          "title": "Women at War"
+          "start": 2175,
+          "title": "Exploring an AI reboot and the ethics that surround it"
         },
         {
-          "start": 2049,
-          "title": "Caregiving"
+          "start": 2660,
+          "title": "Rachel Maddow on how the DOJ has strayed from its mission"
         },
         {
-          "start": 2559,
-          "title": "Settle-In"
-        },
-        {
-          "start": 3055,
-          "title": "Holiday Shopping"
-        },
-        {
-          "start": 3326,
-          "title": "Goodnight"
+          "start": 3120,
+          "title": "A veteran's Brief But Spectacular take on new ways to serve"
         }
       ]
     },
@@ -54,12 +46,12 @@
     },
     "compasspoints": {
       "videoId": "y3WfO4cu5f0",
-      "title": "Compass Points full episode, Nov. 19, 2026",
+      "title": "Compass Points full episode, Nov. 20, 2026",
       "chapters": []
     },
     "horizons": {
-      "videoId": "oyum0B3XtMg",
-      "title": "Horizons full episode, Nov. 13, 2026",
+      "videoId": "n-xzE8Q77vs",
+      "title": "Horizons full episode, Nov. 20, 2026",
       "chapters": []
     }
   }
